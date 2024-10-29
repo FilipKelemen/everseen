@@ -23,9 +23,14 @@ function getParsedArguments(processArgs) {
 
 export default function startProcess(files,levels,messages) {
   files.forEach(async (file) => {
-    for await (const s of parseIterator(file, levels, messages)) {
-      console.log(s)
+    try {
+      for await (const s of parseIterator(file, levels, messages)) {
+        console.log(s)
+      }
+    } catch (err) {
+      console.log(err.message)
     }
+
   })
 }
 if(process.argv[1] === import.meta.filename) {
